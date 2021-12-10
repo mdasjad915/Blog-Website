@@ -1,8 +1,13 @@
 import multer from "multer";
 import { GridFsStorage } from "multer-gridfs-storage";
 
+const URL = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
 const storage = new GridFsStorage({
-  url: `mongodb://user:blogwebsite@blogweb-shard-00-00.aicfo.mongodb.net:27017,blogweb-shard-00-01.aicfo.mongodb.net:27017,blogweb-shard-00-02.aicfo.mongodb.net:27017/BLOGAPPLICATIONDSAMTE?ssl=true&replicaSet=atlas-j7qdq3-shard-0&authSource=admin&retryWrites=true&w=majority`,
+  url: URL,
   options: { useUnifiedTopology: true, useNewUrlParser: true },
   file: (request, file) => {
     const match = ["image/png", "image/jpg"];
